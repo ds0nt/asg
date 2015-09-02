@@ -1,3 +1,5 @@
+#!/bin/babel-node
+
 import parseArgs from 'minimist'
 import fs from 'fs'
 
@@ -16,6 +18,9 @@ Commands:
   endpoint <uri> <view>
 `
 
+let options = parseArgs(process.argv.slice(2))._
+let command = options.shift();
+
 function failure(msg=false, help=true) {
   if (msg)
     console.error(msg);
@@ -25,15 +30,20 @@ function failure(msg=false, help=true) {
 }
 
 
-let options = parseArgs(process.argv.slice(2))._
-let command = options.pop();
-
-switch (command) {
-  case 'template':
+let commands = {
+  template() {
     let [name, file] = options
     core.templates.create(name, fs.readfileSync(file))
-    break;
-  default:
-    console.error(`The option '${command}' is invalid`);
-    failure()
+  },
+  render() {
+    let [name, data] = options
+    core.site.render(name, data)
+  }
+}
+
+if (typeof commands[command] === 'function') {
+  commands[command](options);
+} else {
+  console.error(`The option '${command}' is invalid`);
+  failure()
 }
