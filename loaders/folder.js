@@ -1,7 +1,5 @@
 import path from 'path'
 import fs from 'fs'
-import yaml from 'js-yaml'
-import hbs from 'handlebars'
 
 class FolderLoader {
   constructor(root) {
@@ -11,13 +9,13 @@ class FolderLoader {
     let file = path.join(this.root, 'templates', name)
     let src = fs.readFileSync(file, 'utf8')
     console.log(`Loaded: ${file} (${src.length} chars)`)
-    return hbs.compile(src)
+    return src
   }
   config(name) {
     let file = path.join(this.root, 'config', name)
     let src = fs.readFileSync(file, 'utf8')
     console.log(`Loaded: ${file} (${src.length} chars)`)
-    return yaml.safeLoad(src)
+    return src
   }
 }
 

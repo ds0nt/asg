@@ -12,17 +12,13 @@ let templates = {
   }
 }
 
-import loader from './loaders/folder'
-
-let stash = loader('./site')
+import loader from './lib/loader'
 
 let site = {
   render(name, config) {
-    let run = stash.template(name)
-    let data = stash.config(config)
-    let merged = run(data)
-    console.log(merged)
-    return merged;
+    let generated = loader.render(name, config);
+    console.log(generated)
+    return generated;
   }
 }
 
