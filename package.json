@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/ds0nt/asg#readme",
   "dependencies": {
+    "axios": "^0.5.4",
     "handlebars": "^4.0.0",
     "js-yaml": "^3.4.0",
     "kcors": "^1.0.1",

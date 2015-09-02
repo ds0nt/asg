@@ -1,7 +1,7 @@
 #!/bin/babel-node
 
 import parseArgs from 'minimist'
-import core from './core'
+import core from './lib/core'
 
 let usage = `
 Usage:
