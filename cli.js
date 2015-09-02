@@ -1,8 +1,6 @@
 #!/bin/babel-node
 
 import parseArgs from 'minimist'
-import fs from 'fs'
-
 import core from './core'
 
 let usage = `
@@ -18,9 +16,6 @@ Commands:
   endpoint <uri> <view>
 `
 
-let options = parseArgs(process.argv.slice(2))._
-let command = options.shift();
-
 function failure(msg=false, help=true) {
   if (msg)
     console.error(msg);
@@ -29,21 +24,20 @@ function failure(msg=false, help=true) {
   process.exit(1);
 }
 
+let options = parseArgs(process.argv.slice(2))._
+let resource = options.shift();
+let command = options.shift();
 
-let commands = {
-  template() {
-    let [name, file] = options
-    core.templates.create(name, fs.readfileSync(file))
-  },
-  render() {
-    let [name, data] = options
-    core.site.render(name, data)
-  }
-}
+resource = core[resource]
+if (typeof resource === 'undefined')
+  failure(`The resource '${resource}' is invalid`)
 
-if (typeof commands[command] === 'function') {
-  commands[command](options);
-} else {
-  console.error(`The option '${command}' is invalid`);
-  failure()
+command = resource[command]
+if (typeof command === 'undefined')
+  failure(`The command '${command}' is invalid`)
+
+async function run() {
+  let result = await command(...options)
+  console.log(result)
 }
+run();

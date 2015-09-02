@@ -1,28 +1,36 @@
-import db from './redis'
+import loader from './lib/loaders/redis'
 
-let templates = {
-  async create(name, data) {
-    return await db.set(name, data)
-  },
-  async read(name) {
-    return await db.get(name)
-  },
-  async list() {
-    return await db.keys('*')
+let template = {
+  save: loader.saveTemplate,
+  get: loader.getTemplate,
+  list: loader.listTemplates,
+}
+
+let config = {
+  save: loader.saveConfig,
+  get: loader.getConfig,
+  list: loader.listConfigs,
+}
+
+import handlebars from 'handlebars'
+import yaml from 'js-yaml'
+
+let engine = {
+  async render(templateName, configName) {
+    let rawConfig = await config.get(configName)
+    let config = yaml.safeLoad(rawConfig)
+
+    let rawTemplate = await template.get(templateName)
+    let compiler = handlebars.compile(rawTemplate)
+
+    let result = compiler(config)
+    return result;
   }
 }
 
-import loader from './lib/loader'
-
-let site = {
-  render(name, config) {
-    let generated = loader.render(name, config);
-    console.log(generated)
-    return generated;
-  }
-}
 
 export default {
-  templates,
-  site
+  template,
+  config,
+  engine
 }
