@@ -10,7 +10,17 @@ Usage:
 
 Commands:
 
-  template <name> <path>            - Add named template from file
+  template save <name> <src>
+  template get <name>
+  template list
+
+  config save <name> <src>
+  config get <name>
+  config list
+
+  engine render <template> <config>
+
+Future:
   skeleton-config <name> <template> - Generate the config skeleton
   view <name> <template> <config>   - Create a data driven view with template + config
   endpoint <uri> <view>
@@ -24,17 +34,10 @@ function failure(msg=false, help=true) {
   process.exit(1);
 }
 
-let options = parseArgs(process.argv.slice(2))._
-let resource = options.shift();
-let command = options.shift();
+let [a, b, ...options] = parseArgs(process.argv.slice(2))._
 
-resource = core[resource]
-if (typeof resource === 'undefined')
-  failure(`The resource '${resource}' is invalid`)
-
-command = resource[command]
-if (typeof command === 'undefined')
-  failure(`The command '${command}' is invalid`)
+let resource = core[a] || failure(`The resource '${a}' is invalid`)
+let command = resource[b] || failure(`The command '${b}' is invalid`)
 
 async function run() {
   let result = await command(...options)
