@@ -39,8 +39,6 @@ let [a, b, ...options] = parseArgs(process.argv.slice(2))._
 let resource = core[a] || failure(`The resource '${a}' is invalid`)
 let command = resource[b] || failure(`The command '${b}' is invalid`)
 
-async function run() {
-  let result = await command(...options)
-  console.log(result)
-}
-run();
+command(...options)
+  .then(console.log, err => console.error(err.stack))
+  .then(process.exit)

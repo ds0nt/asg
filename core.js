@@ -1,4 +1,9 @@
-import loader from './lib/loaders/redis'
+var loader;
+if (process.env['ASGDATA'] === 'redis') {
+  loader = require('./lib/loaders/redis')
+} else {
+  loader = require('./lib/loaders/folder')
+}
 
 let template = {
   save: loader.saveTemplate,
@@ -25,12 +30,14 @@ let engine = {
 
     let result = compiler(config)
     return result;
-  }
+  },
+  async close() {
+    return await loader.close()
+  },
 }
-
 
 export default {
   template,
   config,
-  engine
+  engine,
 }
