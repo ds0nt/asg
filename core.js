@@ -31,9 +31,6 @@ let engine = {
     let result = compiler(config)
     return result;
   },
-  async close() {
-    return await loader.close()
-  },
 }
 
 export default {
