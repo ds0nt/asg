@@ -1,0 +1,53 @@
+
+body {
+  padding-top: 75px;
+  height: 100vh;
+}
+.list {
+  position: absolute;
+  left: 0;
+  top: 75px;
+  bottom: 0;
+  width: 300px;
+  background: #EFECEC;
+  color: #232323;
+}
+.list-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.controls {
+  position: absolute;
+  color: #EFECEC;
+  background: #232323;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  padding: 0 20px;
+}
+.controls > * {
+  line-height: 50px;
+  margin: 10px 20px;
+}
+.editor {
+  position: absolute;
+  left: 305px;
+  right: 5px;
+  top: 75px;
+  bottom: 5px;
+}
+
+/*
+.preview {
+  position: absolute;
+  left: 300px;
+  right: 0;
+  bottom: 0;
+  top: 50vh;
+*/
+
+@import "../node_modules/codemirror/lib/codemirror.css";
+@import "../node_modules/codemirror/theme/monokai.css";
