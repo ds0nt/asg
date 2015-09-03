@@ -17,17 +17,22 @@ $ cd <root-of-site>
 $ babel-node api.js
 ```
 
-  **List resources**
-  - GET /config
-  - GET /template
+**List resources**
+
+- GET /config
+- GET /template
+
   
-  **Fetch resources**
-  - GET /config/:name
-  - GET /template/:name
+**Fetch resources**
+
+- GET /config/:name
+- GET /template/:name
+
   
-  **Create resources**
-  - POST /config/:name
-  - POST /template/:name
+**Create resources**
+
+- POST /config/:name
+- POST /template/:name
   
 ## Command Line Interface
 
