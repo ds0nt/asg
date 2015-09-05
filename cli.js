@@ -10,6 +10,8 @@ Usage:
 
 Commands:
 
+  init <path>
+
   template save <name> <src>
   template get <name>
   template list

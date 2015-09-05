@@ -22,11 +22,11 @@ let tplname = 'test-template'
 let ymlname = 'test-config'
 
 async function tests() {
-  testApi('template list', await axios.get(`${host}/template`) )
+  // testApi('template list', await axios.get(`${host}/template`) )
   testApi('template create', await axios.post(`${host}/template/${tplname}`, { data: "hello {{world}}" } ) )
   testApi('template fetch', await axios.get(`${host}/template/${tplname}`) )
 
-  testApi('config list', await axios.get(`${host}/config`) )
+  // testApi('config list', await axios.get(`${host}/config`) )
   testApi('config create', await axios.post(`${host}/config/${ymlname}`, { data: "world: a whole new world!!" } ) )
   testApi('config fetch', await axios.get(`${host}/config/${ymlname}`) )
 
