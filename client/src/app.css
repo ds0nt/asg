@@ -3,20 +3,6 @@ body {
   padding-top: 75px;
   height: 100vh;
 }
-.list {
-  position: absolute;
-  left: 0;
-  top: 75px;
-  bottom: 0;
-  width: 300px;
-  background: #EFECEC;
-  color: #232323;
-}
-.list-title {
-  text-transform: uppercase;
-  font-weight: bold;
-  opacity: 0.8;
-}
 
 .controls {
   position: absolute;
@@ -28,18 +14,15 @@ body {
   height: 70px;
   padding: 0 20px;
 }
+
 .controls > * {
   line-height: 50px;
   margin: 10px 20px;
 }
-.editor {
-  position: absolute;
-  left: 305px;
-  right: 5px;
-  top: 75px;
-  bottom: 5px;
-}
 
+.code-container {
+  padding: 0px !important;
+}
 /*
 .preview {
   position: absolute;
