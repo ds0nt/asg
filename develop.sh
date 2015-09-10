@@ -3,7 +3,7 @@
 # docker stop redis-asg
 # docker rm redis-asg
 
-docker run -d --restart=always --privileged \
+docker run -d --restart=always \
   -p 6379:6379 \
   -v /var/redis-asg:/data \
   --name="redis-asg" \
@@ -13,3 +13,4 @@ docker run -d --restart=always --privileged \
 
 xfce4-terminal --command="/code/asg/serve.js"
 xfce4-terminal --command="/code/asg/client/watch.sh"
+xfce4-terminal --command="livereload /code/asg/client/dist -p 60080"

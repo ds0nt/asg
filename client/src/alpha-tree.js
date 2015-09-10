@@ -1,45 +1,7 @@
 import element from 'virtual-element'
 import { render, tree } from 'deku'
 
-let FileItem = {
-  render: c => {
-    if (c.props.active) {
-      return <div class="active item">
-        <i class="file icon"></i>
-        <div class="content">
-          <div class="header">{c.props.children}</div>
-        </div>
-      </div>
-    }
-    return <a class="item" onClick={c.props.onClick}>
-      <i class="file icon"></i>
-      <div class="content">
-        <div class="header">{c.props.children}</div>
-      </div>
-    </a>
-  }
-}
-
-let FolderItem = {
-  render: c => <div class={`item ${c.props.active ? "active" : ""}`}>
-    <i class="folder icon"></i>
-    <div class="content">
-      <div class="header">{c.props.header}</div>
-      <div class="description">{c.props.description}</div>
-      <div class="ui link list">
-        {c.props.children}
-      </div>
-    </div>
-  </div>
-}
-
-let Loader = {
-  render({props}) {
-    return <div class={`ui ${props.active ? "active" : ""} dimmer`}>
-      <div class="ui text loader">Loading</div>
-    </div>
-  }
-}
+import Loader from './alpha-loader'
 
 let Tree = {
   propTypes: {
@@ -77,29 +39,61 @@ let Tree = {
     }
 
     templates = templates.map(i =>
-      <FileItem key={`template-${i}`}
+      <Item key={`template-${i}`}
         active={`template-${i}` == state.item }
         onClick={itemSelected}>
         {i}
-      </FileItem>
+      </Item>
     )
     configs = configs.map(i =>
-      <FileItem key={`config-${i}`}
+      <Item key={`config-${i}`}
         active={`config-${i}` == state.item }
         onClick={itemSelected}>
         {i}
-      </FileItem>
+      </Item>
     )
 
     return <div class="ui list segment">
       <Loader active={state.loading}>Loading</Loader>
-      <FolderItem header="Templates" description="Template files for project">
+      <Section header="Templates">
         {templates}
-      </FolderItem>
-      <FolderItem header="Configs" description="Config data for templates">
+      </Section>
+      <Section header="Configs">
         {configs}
-      </FolderItem>
+      </Section>
     </div>
   }
 }
 export default Tree
+
+let Item = {
+  render: c => {
+    if (c.props.active) {
+      return <div class="active item">
+        <i class="file icon"></i>
+        <div class="content">
+          <div class="header">{c.props.children}</div>
+        </div>
+      </div>
+    }
+    return <a class="item" onClick={c.props.onClick}>
+      <i class="file icon"></i>
+      <div class="content">
+        <div class="header">{c.props.children}</div>
+      </div>
+    </a>
+  }
+}
+
+let Section = {
+  render: c => <div class={`item ${c.props.active ? "active" : ""}`}>
+    <i class="tag icon"></i>
+    <div class="content">
+      <div class="header">{c.props.header}</div>
+      <div class="description">{c.props.description}</div>
+      <div class="ui link list">
+        {c.props.children}
+      </div>
+    </div>
+  </div>
+}

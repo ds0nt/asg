@@ -26,14 +26,18 @@ post `/template/:name` (
 
 get `/config` (core.config.list)
 get `/config/:name` (
-	name => core.config.get(name) 
+	name => core.config.get(name)
 )
 post `/config/:name` (
-	(name, {data}) => core.config.save(name, data) 
+	(name, {data}) => core.config.save(name, data)
 )
 
-post `/render/:name` ( 
-	(name, {config}) => core.engine.render(name, config) 
+post `/render/:name` (
+	(name, {config}) => core.engine.render(name, config)
+)
+
+get `/:name` (
+	name => core.engine.serve(name)
 )
 
 miniapi.serve(__dirname + '/client/dist')

@@ -4,24 +4,9 @@ body {
   height: 100vh;
 }
 
-.controls {
-  position: absolute;
-  color: #EFECEC;
-  background: #232323;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
-  padding: 0 20px;
-}
-
-.controls > * {
-  line-height: 50px;
-  margin: 10px 20px;
-}
-
 .code-container {
   padding: 0px !important;
+  min-height: 5em;
 }
 /*
 .preview {

@@ -18,8 +18,8 @@ function testApi(title, result) {
     failed++
 }
 
-let tplname = 'test-template'
-let ymlname = 'test-config'
+let tplname = 'compose.yml'
+let ymlname = 'webserver.yml'
 
 async function tests() {
   // testApi('template list', await axios.get(`${host}/template`) )
