@@ -1,27 +1,27 @@
 import { get, post, delete } from 'axios'
 import config from '../config'
 let host = config.dray.host
-let url = s => host + s
 
 export default {
   all: async() => {
-    let { data } = await get(url`/jobs`)
-    return data
+    let res = await get(`${host}/jobs`)
+    console.log(res)
+    return res.data
   },
   fetch: async(id) => {
-    let { data } = await get(url`/jobs/${id}`)
+    let { data } = await get(`${host}/jobs/${id}`)
     return data
   },
   log: async(id) => {
-    let { data } = await get(url`/jobs/${id}/log`)
+    let { data } = await get(`${host}/jobs/${id}/log`)
     return data
   },
-  spawn: async() => {
-    let { data } = await post(url`/jobs`)
+  spawn: async(options) => {
+    let { data } = await post(`${host}/jobs`, options)
     return data
   },
   kill: async(id) => {
-    let { data } = await delete(url`/jobs/{id}`)
+    let { data } = await delete(`${host}/jobs/${id}`)
     return data
   },
 }
