@@ -8,7 +8,8 @@ let Tree = {
     return {
       loading: true,
       item: null,
-      items: []
+      items: [],
+      adding: false
     }
   },
 
@@ -23,10 +24,18 @@ let Tree = {
   render({ props, state }, setState) {
     let { items=[] } = state
 
+    let add = async(e, c) => {
+      setState({ adding: false, loading: true })
+      let item = await c.props.newItem(c.state.adding, "")
+      let items = await c.props.items()
+      setState({ items: items.data, loading: false })
+    }
+
     let select = (e, c, u) => {
       setState({ item: c.props.item })
       props.clicked(c.props.item)
     }
+
     console.log(items)
     let list = items.map(item =>
       <Item active={state.item} item={item} onClick={select} />
@@ -36,9 +45,17 @@ let Tree = {
       <Loader active={state.loading}>Loading</Loader>
       <div class="ui top attached inverted segment">
         <i class="tag icon"></i>{props.title}
-        <div class="ui inverted tiny basic button">Blue</div>
+        { state.adding !== false ? <div>
+            <input type="text" class="ui inverted tiny basic input" onChange={ e => setState({ adding: e.target.value }) } />
+            <div class="ui inverted tiny basic button" onClick={add}>
+              <i class="inverted icon add"></i>
+            </div>
+          </div> : <div class="ui inverted tiny basic button" onClick={() => setState({ adding: '' })}>
+            <i class="inverted add icon"></i>
+          </div> }
       </div>
       {list}
+
     </div>
   }
 }

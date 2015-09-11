@@ -1,0 +1,20 @@
+{  
+  "name":"Demo Job",
+  "steps":[  
+    {  
+      "name": "random-word",
+      "source": "centurylink/randword",
+      "environment" :[  
+        { "variable":"WORD_COUNT", "value":"10" }
+      ]
+    },
+    {  
+      "name":"uppercase",
+      "source":"centurylink/upper"
+    },
+    {  
+      "name":"reverse",
+      "source":"centurylink/reverse"
+    },      
+  ]
+}

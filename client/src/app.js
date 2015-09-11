@@ -34,12 +34,14 @@ let Grid = {
       <div class="four wide column">
         <BTree
           title="templates"
+          newItem={templates.save}
           clicked={opentemplate}
           items={templates.load} />
       </div>
       <div class="four wide column">
         <BTree
           title="configs"
+          newItem={configs.save}
           clicked={openconfig}
           items={configs.load} />
       </div>
